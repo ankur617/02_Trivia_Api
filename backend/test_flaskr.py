@@ -136,7 +136,7 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(data["message"], "resource not found")
 
     def test_quiz_without_previous_question(self):
-        res = self.client().get("/quizzes", json={"quiz_category": {"id": 2}})
+        res = self.client().post("/quizzes", json={"quiz_category": {"id": 2}})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -144,7 +144,7 @@ class TriviaTestCase(unittest.TestCase):
         self.assertTrue(data["question"])
 
     def test_quiz_with_previous_question(self):
-        res = self.client().get("/quizzes", json={"quiz_category": {"id": 1}, "previous_questions":[20,21]})
+        res = self.client().post("/quizzes", json={"quiz_category": {"id": 1}, "previous_questions":[20,21]})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -153,7 +153,7 @@ class TriviaTestCase(unittest.TestCase):
     
 
     def test_quiz_question_finsihed(self):
-        res = self.client().get("/quizzes", json={"quiz_category": {"id": 1}, "previous_questions":[20,21,22]})
+        res = self.client().post("/quizzes", json={"quiz_category": {"id": 1}, "previous_questions":[20,21,22]})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)

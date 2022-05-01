@@ -124,6 +124,8 @@ def create_app(test_config=None):
   def createQuestion():
     
     body = request.get_json()
+    
+    #Parse all the request fields
     new_question = body.get("question", None)
     new_difficulty = body.get("difficulty", None)
     new_category = body.get("category", None)
@@ -169,7 +171,7 @@ def create_app(test_config=None):
     #Fetch the questions based on the search term
     questions = Question.query.filter(Question.question.ilike(queryTerm)).order_by(Question.id).all()
 
-    # Check if even a single question has search term
+    # Check if not even a single question has search term
     if  len(questions) == 0:
       abort(404)
 
@@ -217,7 +219,7 @@ def create_app(test_config=None):
   # Get questions to play the quiz. 
   # Pass category and previous question parameters and return a random questions within the given category, if provided, and that is not one of the previous questions. 
 
-  @app.route('/quizzes', methods=['GET', 'POST'])
+  @app.route('/quizzes', methods=['POST'])
   def playQuiz():
     data = json.loads(request.data)
     previousQuestions = []

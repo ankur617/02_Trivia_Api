@@ -53,6 +53,43 @@ The `--reload` flag will detect file changes and restart the server automaticall
 '5' : "Entertainment",
 '6' : "Sports"}
 ```
+### GET '/questions?page=1'
+- Paginate and fetches the questions in below format.
+- The Page number is passed as a query parameter, and each page contains 10 questions
+- Request Arguments: None
+- Returns: Array of questions, current_category, all categories and total questions. 
+```
+{
+    "categories": {
+        "1": "Science",
+        "2": "Art",
+        "3": "Geography",
+        "4": "History",
+        "5": "Entertainment",
+        "6": "Sports"
+    },
+    "current_category": "History",
+    "questions": [
+        {
+            "answer": "Maya Angelou",
+            "category": 4,
+            "difficulty": 2,
+            "id": 5,
+            "question": "Whose autobiography is entitled 'I Know Why the Caged Bird Sings'?"
+        }
+    ],
+    "total_questions": 21
+}
+```
+- Error: HTTP ERROR CODE: 404, When no records are found. The response would be as follows:
+```
+{
+    "error": 404,
+    "message": "resource not found",
+    "success": false
+}
+```
+
 
 ## Testing
 To run the tests, run

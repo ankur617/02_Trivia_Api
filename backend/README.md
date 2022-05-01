@@ -89,7 +89,140 @@ The `--reload` flag will detect file changes and restart the server automaticall
     "success": false
 }
 ```
+### DELETE '/questions/2'
+- Deletes the question with id '2'.
+- Request Arguments: None
+- Returns: The id of the deleted message back. 
+```
+{
+    "deleted": 5
+}
+```
+- Error: If the question requested to be deleted is not found. Then HTTP ERROR CODE: 422 is returned.
+```
+{
+    "error": 422,
+    "message": "unprocessable",
+    "success": false
+}
+```
+### POST '/questions'
+- Creates a new question.
+- Request Arguments: 
+```
+{
+    "question":  "Hello this a test question",
+    "difficulty": 2,
+    "category": 2,
+    "answer": "Answer"
+}
+```
+- Returns: The id of the created message back. 
+```
+{
+    "created": 50
+}
+```
+- Error: If the question creation fails, Then HTTP ERROR CODE: 422 is returned.
+```
+{
+    "error": 422,
+    "message": "unprocessable",
+    "success": false
+}
+```
+```
+### POST '/questions/search'
+- Searches a the question based on the search term passed in the input.
+- Request Arguments: 
+```
+{
+    "searchTerm":  "Hello"
+}
+```
+- Returns: All the question containing the search term, current category and total questions. 
+```
+{
+    "current_category": "Art",
+    "questions": [
+        {
+            "answer": "Answer",
+            "category": 2,
+            "difficulty": 2,
+            "id": 32,
+            "question": "Hello this a test question"
+        },
+        {
+            "answer": "Answer",
+            "category": 2,
+            "difficulty": 2,
+            "id": 33,
+            "question": "Hello this a test question"
+        }
+    ]
+    "total_questions": 2
+}
+```
+- Error: If the none of the question has search term, Then HTTP ERROR CODE: 404 is returned.
+```
+{
+    "error": 404,
+    "message": "resource not found"
+}
+```
+### GET '/categories/2/questions'
+- Return all the question for a given category. In the above URI '2' denotes the category id.
+- Request Arguments: None
+- Returns: All all the question as a array, current_category and total_questions. 
+```
+{
+    "current_category": "Art",
+    "questions": [
+        {
+            "answer": "Escher",
+            "category": 2,
+            "difficulty": 1,
+            "id": 16,
+            "question": "Which Dutch graphic artist–initials M C was a creator of optical illusions?"
+        },....
+    ]
+    "total_questions": 6
+}
+```
+- Error: If the none of the question is found for the category, Then HTTP ERROR CODE: 404 is returned.
+```
+{
+    "error": 404,
+    "message": "resource not found"
+}
+```
+### POST '/quizzes'
+- Provide an endpoint to get questions to play the quiz. 
+- Pass category and previous question parameters and return a random questions within the given category, if provided, and that is not one of the previous questions.
+- If category is selected as all, then the questions are not filtered on categories.
+- Request Arguments: 
+{
+"quiz_category": {"id":2},
+"previous_questions": [16]
+}
+- Returns: A random question for category, whcih is not in previous question. 
+```
+{
+    "question": {
+        "answer": "Mona Lisa",
+        "category": 2,
+        "difficulty": 3,
+        "id": 17,
+        "question": "La Giaconda is better known as what?"
+    }
+}
+- Returns: When no more question are left, following is returned:
+```
+{
+    "question": null
+}
 
+```
 
 ## Testing
 To run the tests, run

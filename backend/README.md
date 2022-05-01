@@ -131,7 +131,6 @@ The `--reload` flag will detect file changes and restart the server automaticall
     "success": false
 }
 ```
-```
 ### POST '/questions/search'
 - Searches a the question based on the search term passed in the input.
 - Request Arguments: 

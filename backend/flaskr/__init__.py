@@ -40,10 +40,12 @@ def create_app(test_config=None):
 
     # Initialize
     format_categories = {}
+    print('here')
 
     #Iterate through the categories and format them into desired output format
     for category in categories:
-      format_categories = format_categories | category.format()
+      
+      format_categories.update(category.format())
     
     return format_categories
   
